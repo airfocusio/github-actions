@@ -1,7 +1,5 @@
 ## Collection of useful actions
 
----
-
 Example:
 
 ````yaml
