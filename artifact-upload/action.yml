@@ -1,8 +1,8 @@
-name: 'Archive upload'
-description: 'Archive upload'
+name: 'Artifact upload'
+description: 'Artifact upload'
 inputs:
   name:
-    description: 'Archive name'
+    description: 'Artifact name'
     required: true
   pattern:
     description: 'Glob pattern with files to archive'

@@ -1,8 +1,8 @@
-name: 'Archive download'
-description: 'Archive download'
+name: 'Artifact download'
+description: 'Artifact download'
 inputs:
   name:
-    description: 'Archive name'
+    description: 'Artifact name'
     required: true
   keep:
     description: 'Whether to keep the artifact file'
