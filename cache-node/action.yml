@@ -1,0 +1,16 @@
+name: 'Cache Node'
+description: 'Cache Node'
+outputs:
+  cache-hit:
+    description: 'Is true if cache hit on primary key'
+    value: ${{ steps.node-cache.outputs.cache-hit }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v2.1.7
+      id: node-cache
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          node-modules-${{ runner.os }}

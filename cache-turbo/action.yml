@@ -1,0 +1,16 @@
+name: 'Cache Turbo'
+description: 'Cache Turbo'
+outputs:
+  cache-hit:
+    description: 'Is true if cache hit on primary key'
+    value: ${{ steps.turbo-cache.outputs.cache-hit }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v2.1.7
+      id: turbo-cache
+      with:
+        path: node_modules/.cache/turbo
+        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+        restore-keys: |
+          turbo-${{ github.job }}-${{ github.ref_name }}

@@ -1,0 +1,24 @@
+name: 'Archive upload'
+description: 'Archive upload'
+inputs:
+  name:
+    description: 'Archive name'
+    required: true
+  pattern:
+    description: 'Glob pattern with files to archive'
+    required: true
+  keep:
+    description: 'Whether to keep the artifact file'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - run: tar cvzf ${{ inputs.name }}.tgz ${{ inputs.pattern }}
+      shell: bash
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.name }}.tgz
+    - run: rm ${{ inputs.name }}.tgz
+      if: ${{ inputs.keep != true }}
+      shell: bash

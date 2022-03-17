@@ -1,0 +1,20 @@
+name: 'Archive download'
+description: 'Archive download'
+inputs:
+  name:
+    description: 'Archive name'
+    required: true
+  keep:
+    description: 'Whether to keep the artifact file'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: ${{ inputs.name }}
+    - run: tar -xvf ${{ inputs.name }}.tgz
+      shell: bash
+    - run: rm ${{ inputs.name }}.tgz
+      if: ${{ inputs.keep != true }}
+      shell: bash

@@ -1,0 +1,18 @@
+name: 'Setup Node'
+description: 'Setup Node'
+inputs:
+  npm-registry:
+    description: 'Npm registry domain to authenticate'
+    required: false
+  npm-token:
+    description: 'Npm authentication token'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - run: npm set //${{ inputs.npm-registry }}/:_authToken ${{ inputs.npm-token }}
+      if: ${{ inputs.npm-registry }} != null && ${{ inputs.npm-token }} != null
+      shell: bash

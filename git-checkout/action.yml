@@ -1,0 +1,8 @@
+name: "Git checkout"
+description: "Git checkout"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
