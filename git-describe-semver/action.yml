@@ -1,0 +1,33 @@
+name: "Git describe semver"
+description: "Git describe semver"
+inputs:
+  version:
+    description: The git-describe-semver version
+    required: false
+    default: 0.3.4
+  options:
+    description: CLI options of git-describe-semver
+    required: false
+    default: --fallback v0.0.0 --drop-prefix --prerelease-suffix SNAPSHOT
+outputs:
+  version:
+    description: 'The constructed version'
+    value: ${{ steps.version.outputs.version }}
+  type:
+    description: 'The type of the constructed version - release or snapshot'
+    value: ${{ steps.type.outputs.type }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        curl -fsSL https://github.com/choffmeister/git-describe-semver/releases/download/v${VERSION}/git-describe-semver_${VERSION}_linux_amd64.tar.gz | tar xz
+        mv git-describe-semver /usr/local/bin
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+    - run: echo "::set-output name=version::$(git-describe-semver ${{ inputs.options }})"
+      id: version
+      shell: bash
+    - run: if echo ${{ steps.version.outputs.version }} | grep -E '^([0-9]+)\.([0-9]+)\.([0-9]+)$' > /dev/null; then echo "::set-output name=type::release"; else echo "::set-output name=type::snapshot"; fi
+      id: type
+      shell: bash
