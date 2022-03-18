@@ -24,7 +24,7 @@ runs:
         mv git-describe-semver /usr/local/bin
       shell: bash
       env:
-        VERSION: ${{ inputs.script-version }}
+        VERSION: ${{ inputs.version }}
     - run: echo "::set-output name=version::$(git-describe-semver ${{ inputs.options }})"
       id: version
       shell: bash
