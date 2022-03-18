@@ -12,7 +12,7 @@ runs:
   steps:
     - run: git config --global user.email ${{ inputs.git-email }}
       if: ${{ inputs.git-email }} != null
-      shell: bash
+      shell: sh
     - run: git config --global user.email ${{ inputs.git-username }}
       if: ${{ inputs.git-username }} != null
-      shell: bash
+      shell: sh
