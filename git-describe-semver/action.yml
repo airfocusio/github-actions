@@ -22,7 +22,6 @@ runs:
     - run: |
         curl -fsSL https://github.com/choffmeister/git-describe-semver/releases/download/v${VERSION}/git-describe-semver_${VERSION}_linux_amd64.tar.gz | tar xz
         mv git-describe-semver /usr/local/bin
-      id: version
       shell: bash
       env:
         VERSION: ${{ inputs.script-version }}
