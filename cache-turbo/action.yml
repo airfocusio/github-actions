@@ -7,10 +7,13 @@ outputs:
 runs:
   using: composite
   steps:
+    - id: get-date
+      run: echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+      shell: bash
     - uses: actions/cache@v2.1.7
       id: turbo-cache
       with:
         path: node_modules/.cache/turbo
-        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+        key: turbo-${{ runner.os }}-${{ github.job }}-${{ steps.get-date.outputs.date }}-${{ github.ref_name }}-${{ github.sha }}
         restore-keys: |
-          turbo-${{ github.job }}-${{ github.ref_name }}
+          turbo-${{ runner.os }}-${{ github.job }}-${{ steps.get-date.outputs.date }}-${{ github.ref_name }}
