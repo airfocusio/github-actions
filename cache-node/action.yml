@@ -19,4 +19,6 @@ runs:
       if: steps.yarn-cache-dir-path.outputs.dir != 'undefined'
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        restoreKeys: |
+          yarn-cache-${{ runner.os }}
