@@ -20,5 +20,5 @@ runs:
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-        restoreKeys: |
+        restore-keys: |
           yarn-cache-${{ runner.os }}
