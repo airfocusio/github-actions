@@ -4,6 +4,9 @@ inputs:
   npm-registry:
     description: 'Npm registry domain to authenticate'
     required: false
+  npm-scope:
+    description: 'Npm scope to authenticate'
+    required: false
   npm-token:
     description: 'Npm authentication token'
     required: false
@@ -15,4 +18,7 @@ runs:
         node-version: '16'
     - run: npm set //${{ inputs.npm-registry }}/:_authToken ${{ inputs.npm-token }}
       if: ${{ inputs.npm-registry }} != null && ${{ inputs.npm-token }} != null
+      shell: bash
+    - run: yarn config set "npmScopes.${{ inputs.npm-scope }}.npmAuthToken" "${{ inputs.npm-token }}"
+      if: ${{ inputs.npm-scope }} != null && ${{ inputs.npm-token }} != null
       shell: bash
