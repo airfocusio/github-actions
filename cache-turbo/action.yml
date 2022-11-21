@@ -8,9 +8,9 @@ runs:
   using: composite
   steps:
     - id: get-date
-      run: echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+      run: echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
       shell: bash
-    - uses: actions/cache@v2.1.7
+    - uses: actions/cache@v3
       id: turbo-cache
       with:
         path: node_modules/.cache/turbo

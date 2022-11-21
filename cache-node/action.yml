@@ -7,12 +7,12 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: actions/cache@v2.1.7
+    - uses: actions/cache@v3
       id: node-cache
       with:
         path: '**/node_modules'
         key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-    - run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+    - run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       shell: bash
       id: yarn-cache-dir-path
     - uses: actions/cache@v3

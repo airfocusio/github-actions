@@ -25,9 +25,11 @@ runs:
       shell: bash
       env:
         VERSION: ${{ inputs.version }}
-    - run: echo "::set-output name=version::$(git-describe-semver ${{ inputs.options }})"
-      id: version
+    - run: echo "version=$(git-describe-semver ${{ inputs.options }})" >> $GITHUB_OUTPUT
       shell: bash
-    - run: if echo ${{ steps.version.outputs.version }} | grep -E '^([0-9]+)\.([0-9]+)\.([0-9]+)$' > /dev/null; then echo "::set-output name=type::release"; else echo "::set-output name=type::snapshot"; fi
+      id: version
+      env:
+        OPTIONS: ${{ inputs.options }}
+    - run: if echo ${{ steps.version.outputs.version }} | grep -E '^([0-9]+)\.([0-9]+)\.([0-9]+)$' > /dev/null; then echo "type=release" >> $GITHUB_OUTPUT; else echo "type=snapshot" >> $GITHUB_OUTPUT; fi
       id: type
       shell: bash

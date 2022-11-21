@@ -15,7 +15,7 @@ runs:
   steps:
     - run: tar cvzf ${{ inputs.name }}.tgz ${{ inputs.pattern }}
       shell: bash
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.name }}.tgz
