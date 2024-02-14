@@ -13,9 +13,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '20'
     - run: npm set //${{ inputs.npm-registry }}/:_authToken ${{ inputs.npm-token }}
       if: ${{ inputs.npm-registry }} != null && ${{ inputs.npm-token }} != null
       shell: bash
