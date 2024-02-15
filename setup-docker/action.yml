@@ -13,7 +13,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: docker/setup-qemu-action@v2
+    - uses: docker/setup-qemu-action@v3
     - uses: docker/setup-buildx-action@v3
     - run: echo ${{ inputs.docker-password }} | docker login ${{ inputs.docker-registry }} -u ${{ inputs.docker-username }} --password-stdin
       if: ${{ inputs.docker-password }} != null && ${{ inputs.docker-registry }} != null && ${{ inputs.docker-username }} != null
