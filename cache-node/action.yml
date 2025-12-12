@@ -7,7 +7,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       id: node-cache
       with:
         path: '**/node_modules'
@@ -15,7 +15,7 @@ runs:
     - run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       shell: bash
       id: yarn-cache-dir-path
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       if: steps.yarn-cache-dir-path.outputs.dir != 'undefined'
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
